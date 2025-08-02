@@ -10,7 +10,8 @@ import {
 import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
 import { motion } from "framer-motion";
-import { ExternalLink, Github, Eye } from "lucide-react";
+import { ExternalLink, Github } from "lucide-react";
+import Image from "next/image";
 
 type projectsType = {
   image: string;
@@ -114,11 +115,15 @@ const Project = () => {
                       whileHover={{ scale: 1.05 }}
                       transition={{ duration: 0.3 }}
                     >
-                      <img
-                        src={project.image}
-                        alt={project.title}
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                      />
+                     <Image
+  src={project.image}
+  alt={project.title}
+  width={600}
+  height={300}
+  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+  placeholder="blur"
+  blurDataURL="/placeholder.png" // Optional: can be a tiny base64 image
+/>
                     </motion.div>
 
                     {/* Overlay on Hover */}

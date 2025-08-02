@@ -1,6 +1,8 @@
 "use client";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
+import Image from "next/image";
+
 
 const achievements = [
   {
@@ -32,7 +34,8 @@ const achievements = [
 
 const Achievements = () => {
   const [flippedItems, setFlippedItems] = useState(new Set());
-  const [hoveredItem, setHoveredItem] = useState(null);
+const [hoveredItem, setHoveredItem] = useState<number | null>(null);
+
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -97,12 +100,15 @@ const Achievements = () => {
                   className="w-full relative"
                   style={{ backfaceVisibility: "hidden" }}
                 >
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="w-full h-auto object-cover rounded-lg"
-                    loading="lazy"
-                  />
+                  <Image
+  src={item.image}
+  alt={item.title}
+  width={500} // or auto-resize using layout="responsive"
+  height={300}
+  className="w-full h-auto object-cover rounded-lg"
+  loading="lazy"
+/>
+
                 </div>
 
                 {/* Back side - Info */}
