@@ -1,13 +1,14 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import Appbar from "@/components/appbar/Appbar";
 import Hero from "@/components/hero/Hero";
 import Project from "@/components/projects/Project";
 import Skills from "@/components/skills/Skills";
 import MasonryGallery from "@/components/achievements/Achievements";
 import Contact from "@/components/contact/Contact";
+
 
 export default function Home() {
   const containerRef = useRef(null);
@@ -24,6 +25,8 @@ export default function Home() {
   // Project slide up and fade in
   const projectY = useTransform(scrollYProgress, [0.2, 0.7], ["130vh", "0vh"]);
   const projectOpacity = useTransform(scrollYProgress, [0.3, 0.7], [0.8, 1]);
+
+
 
   return (
     <div className="dark:bg-black min-h-[250vh] relative" ref={containerRef}>
