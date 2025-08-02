@@ -56,7 +56,7 @@ export default function Home() {
         <MasonryGallery />
       </section>
       {/* {contact me section can go here */}
-      <section className="mb-10 z-30">
+      <section className="md:mb-10 z-30">
         <Contact />
       </section>
     </div>
