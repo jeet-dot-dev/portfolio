@@ -1,51 +1,57 @@
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
-import { AnimatedTooltipPreview } from "./AnimatedTooltipPreview";
 import { Button } from "../ui/button";
 import { Download, ArrowRight, ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
+import { useMemo } from "react";
 
 const Hero = () => {
-  const greetings = [
+
+
+const greetings = useMemo(
+  () => [
     "নমস্কার🙏",
     "Bonjour",
     "Hello",
     "Hola",
     "नमस्ते🙏",
     "Annyeong",
-  ];
+  ],
+  []
+);
+
   const [currentGreeting, setCurrentGreeting] = useState(0);
   const [displayedText, setDisplayedText] = useState("");
   const [isTyping, setIsTyping] = useState(true);
   const [isGlitching, setIsGlitching] = useState(false); // Add this line
 
   useEffect(() => {
-    const currentWord = greetings[currentGreeting];
-    let timeout;
+  const currentWord = greetings[currentGreeting];
+  let timeout: ReturnType<typeof setTimeout>;
 
-    if (isTyping) {
-      if (displayedText.length < currentWord.length) {
-        timeout = setTimeout(() => {
-          setDisplayedText(currentWord.slice(0, displayedText.length + 1));
-        }, 150);
-      } else {
-        timeout = setTimeout(() => {
-          setIsTyping(false);
-        }, 2000);
-      }
+  if (isTyping) {
+    if (displayedText.length < currentWord.length) {
+      timeout = setTimeout(() => {
+        setDisplayedText(currentWord.slice(0, displayedText.length + 1));
+      }, 150);
     } else {
-      if (displayedText.length > 0) {
-        timeout = setTimeout(() => {
-          setDisplayedText(displayedText.slice(0, -1));
-        }, 100);
-      } else {
-        setCurrentGreeting((prev) => (prev + 1) % greetings.length);
-        setIsTyping(true);
-      }
+      timeout = setTimeout(() => {
+        setIsTyping(false);
+      }, 2000);
     }
+  } else {
+    if (displayedText.length > 0) {
+      timeout = setTimeout(() => {
+        setDisplayedText(displayedText.slice(0, -1));
+      }, 100);
+    } else {
+      setCurrentGreeting((prev) => (prev + 1) % greetings.length);
+      setIsTyping(true);
+    }
+  }
 
-    return () => clearTimeout(timeout);
-  }, [displayedText, currentGreeting, isTyping, greetings]);
+  return () => clearTimeout(timeout);
+}, [displayedText, currentGreeting, isTyping, greetings]);
 
   return (
     <div className="min-h-screen w-full mb-5 bg-white dark:bg-black text-black dark:text-white relative overflow-hidden">
