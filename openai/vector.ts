@@ -1,13 +1,7 @@
-// lib/embedAndFormat.ts
-
-import { OpenAI } from "openai";
- // make sure path is correct
-import dotenv from "dotenv";
+import openai from "@/lib/openai";
 import { data } from "@/scripts/resume";
 
-dotenv.config();
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY || "" });
 
 export const getVectorData = async () => {
   try {

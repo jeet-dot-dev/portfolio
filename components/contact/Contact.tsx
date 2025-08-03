@@ -19,22 +19,22 @@ type IconType = {
 const Icons: IconType[] = [
   {
     icon: Mail,
-    link: "jeet22761@gmail.com",
+    link: "mailto:jeet999dev@gmail.com",
     tooltip: "Email",
   },
   {
     icon: Github,
-    link: "https://github.com/yourusername",
+    link: "https://github.com/jeet-dot-dev",
     tooltip: "Github",
   },
   {
     icon: Linkedin,
-    link: "https://linkedin.com/in/yourusername",
+    link: "https://www.linkedin.com/in/jeet-mandal",
     tooltip: "Linkedin",
   },
   {
     icon: TwitterIcon,
-    link: "https://twitter.com/yourusername",
+    link: "https://x.com/jeetdevx",
     tooltip: "Twitter",
   },
 ];
@@ -52,7 +52,7 @@ const Contact = () => {
           Get in Touch
         </h1>
         <p className="text-gray-600 dark:text-gray-300 mb-12">
-          Whether you have a question or just want to say hi, I’ll try my best
+          Whether you have a question or just want to say hi, I&apos;ll try my best
           to get back to you!
         </p>
 
@@ -98,6 +98,8 @@ const Contact = () => {
               <TooltipTrigger>
                 <a
                   href={icon.link}
+                  target={icon.link.startsWith('mailto:') ? '_self' : '_blank'}
+                  rel={icon.link.startsWith('mailto:') ? '' : 'noopener noreferrer'}
                   className="hover:text-green-500 dark:hover:text-[#16f2b3] transition-colors"
                 >
                   <icon.icon size={24} />

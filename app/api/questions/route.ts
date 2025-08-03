@@ -19,11 +19,11 @@ export async function POST(request: Request) {
     const matches = await getTopMatches(embedding, 5);
     const prompt = getJunoHumorPrompt(
       question,
-      matches[0]?.metadata?.text || ""
+      matches
     );
     const reply = await generateResponse(prompt);
 
-   // console.log(matches);
+    //console.log(matches);
     //console.log("Generated reply:", reply);
 
     return new Response(JSON.stringify({ reply }), {

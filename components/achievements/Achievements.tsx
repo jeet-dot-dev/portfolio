@@ -8,27 +8,27 @@ const achievements = [
   {
     title: "Hackathon Win",
     image: "/achieve/achieve4.png",
-    info: "Won 1st place in a hackathon with a team of 4, building a full-stack application using React and Node.js.",
+    info: "Explaining Code-Blitz : Tired of coding alone in your dark room, Code-Blitz brings the thrill of a competitive battleground to DSA. It's like chess.com meets 1v1 LeetCode, powered by AI!",
   },
   {
     title: "Topper Award",
     image: "/achieve/achieve5.png",
-    info: "Recognized as the top student in the Computer Science department for outstanding academic performance.",
+    info: "Receiving the runner-up award at the Code for Change Hackathon, organized by NSHM Knowledge Campus in collaboration with Open Source Student Development Club.",
   },
   {
     title: "GitHub Contributions",
     image: "/achieve/achieve1.png",
-    info: "Made significant contributions to open-source projects on GitHub, showcasing skills in collaboration and coding.",
+    info: "🏆 Team Nexus proudly secured the Runner-Up position at the Code for Change Hackathon organized by NSHM Knowledge Campus in collaboration with Open Source Student Development Club.",
   },
   {
     title: "College Project Fair",
     image: "/achieve/achieve2.png",
-    info: "Presented a project on web development at the college project fair, receiving positive feedback from faculty and peers.",
+    info: "Group photo of the top three winning teams at the Code for Change Hackathon, organized by NSHM Knowledge Campus.",
   },
   {
     title: "Volunteering",
     image: "/achieve/achieve3.png",
-    info: "Contributed to various community service projects, demonstrating a commitment to social responsibility.",
+    info: "What an incredible journey it was at Hack4Bengal 2025, held from June 20–22 at Sister Nivedita University. Three days packed with intense coding, sleepless nights, endless caffeine, and boundless creativity. 💻☕🌙",
   },
 ];
 
