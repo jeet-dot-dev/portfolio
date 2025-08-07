@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 
-
 const achievements = [
   {
     title: "Hackathon Win",
@@ -34,7 +33,7 @@ const achievements = [
 
 const Achievements = () => {
   const [flippedItems, setFlippedItems] = useState(new Set());
-const [hoveredItem, setHoveredItem] = useState<number | null>(null);
+  const [hoveredItem, setHoveredItem] = useState<number | null>(null);
 
   const [isClient, setIsClient] = useState(false);
 
@@ -63,7 +62,10 @@ const [hoveredItem, setHoveredItem] = useState<number | null>(null);
   };
 
   return (
-    <div className="w-full px-4 z-30 relative py-10 bg-white dark:bg-black" id="hackathon">
+    <div
+      className="w-full px-4 z-30 relative py-10 bg-white dark:bg-black"
+      id="hackathon"
+    >
       <h2 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-[#16f2b3] via-blue-500 to-purple-600 bg-clip-text text-transparent text-center mb-11">
         Hackathon Moments
       </h2>
@@ -101,14 +103,13 @@ const [hoveredItem, setHoveredItem] = useState<number | null>(null);
                   style={{ backfaceVisibility: "hidden" }}
                 >
                   <Image
-  src={item.image}
-  alt={item.title}
-  width={500} // or auto-resize using layout="responsive"
-  height={300}
-  className="w-full h-auto object-cover rounded-lg"
-  loading="lazy"
-/>
-
+                    src={item.image}
+                    alt={item.title}
+                    width={500} // or auto-resize using layout="responsive"
+                    height={300}
+                    className="w-full h-auto object-cover rounded-lg"
+                    loading="lazy"
+                  />
                 </div>
 
                 {/* Back side - Info */}
@@ -119,7 +120,7 @@ const [hoveredItem, setHoveredItem] = useState<number | null>(null);
                     transform: "rotateY(180deg)",
                   }}
                 >
-                  <p className="text-[6px] md:text-base text-center leading-relaxed">
+                  <p className="text-[5px] md:text-base text-center leading-relaxed">
                     {item.info}
                   </p>
                 </div>

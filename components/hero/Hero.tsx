@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import { Button } from "../ui/button";
-import { Download, ArrowRight, ChevronDown } from "lucide-react";
+import {  ArrowRight, ChevronDown, Eye } from "lucide-react";
 import { motion } from "framer-motion";
 import { useMemo } from "react";
 
@@ -53,6 +53,9 @@ const greetings = useMemo(
   return () => clearTimeout(timeout);
 }, [displayedText, currentGreeting, isTyping, greetings]);
 
+  const handleViewResume = () => {
+    window.open('/JeetResume.pdf', '_blank');
+  };
   return (
     <div className="min-h-screen w-full mb-5 bg-white dark:bg-black text-black dark:text-white relative overflow-hidden">
       {/* Background Elements */}
@@ -206,17 +209,23 @@ const greetings = useMemo(
               transition={{ duration: 0.8, delay: 1 }}
               className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start px-4 lg:px-0"
             >
-              <Button className="bg-gradient-to-r from-[#16f2b3] to-blue-500 hover:from-[#14d19f] hover:to-blue-600 text-white px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group">
-                <Download className="mr-2 w-4 h-4 sm:w-5 sm:h-5" />
-                Download Resume
+                 <Button 
+                onClick={handleViewResume}
+                className="bg-gradient-to-r from-[#16f2b3] cursor-pointer to-blue-500 hover:from-[#14d19f] hover:to-blue-600 text-white px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group"
+              >
+                <Eye className="mr-2 w-4 h-4 sm:w-5 sm:h-5" />
+                View Resume
               </Button>
-              <Button
+             <a href="#projects">
+               <Button
                 variant="outline"
-                className="border-2 hidden lg:flex border-gray-300 dark:border-gray-600 hover:border-[#16f2b3] dark:hover:border-[#16f2b3] px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg font-semibold rounded-full transition-all duration-300 group"
+               
+                className="border-2 cursor-pointer hidden lg:flex border-gray-300 dark:border-gray-600 hover:border-[#16f2b3] dark:hover:border-[#16f2b3] px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg font-semibold rounded-full transition-all duration-300 group"
               >
                 View Projects
                 <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
+             </a>
             </motion.div>
           </motion.div>
         </div>

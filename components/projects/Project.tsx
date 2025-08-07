@@ -20,34 +20,21 @@ type projectsType = {
   skils: string[];
   liveLink: string;
   githubLink: string;
+  isReady?: boolean;
 };
 
 const Projects: projectsType[] = [
-  {
-    image: "/project1.png",
-    title: "Hire-me",
-    description: "AI-Powered Job Interview Platform",
-    skils: ["TypeScript", "Prisma", "OpenAI", "CI/CD", "Redis", "Nextjs"],
-    liveLink: "https://github.com/jeet-dot-dev/hire-me",
-    githubLink: "https://github.com/jeet-dot-dev/hire-me",
-  },
-  {
-    image: "/project1.png",
-    title: "Draw-we",
-    description: "Express yourself with Draw-we",
-    skils: ["TypeScript", "Prisma", "Turborepo", "WebSocket", "CanvasAPI"],
-    liveLink: "https://github.com/jeet-dot-dev/Excalidraw",
-    githubLink: "https://github.com/jeet-dot-dev/Excalidraw",
-  },
-  {
+   {
     image: "/project3.png",
     title: "HungerJam",
-    description: "A modern food delivery web application with a beautiful UI",
+    description:
+      "A responsive food delivery web app with a beautiful UI, smooth animations, and an intuitive user experience.",
     skils: ["JavaScript", "MongoDB", "Stripe", "Express", "React", "Motion"],
     liveLink: "https://hungerjam.vercel.app/",
     githubLink: "https://github.com/jeet-dot-dev/Hungerjam",
+    isReady: true,
   },
-  {
+    {
     image: "/project4.png",
     title: "CodeBlits",
     description:
@@ -55,15 +42,40 @@ const Projects: projectsType[] = [
     skils: ["JavaScript", "MongoDB", "SocketIO", "Motion"],
     liveLink: "https://code-blitz-ils2dcerh-jeet-mandals-projects.vercel.app/",
     githubLink: "https://github.com/jeet-dot-dev/Code-Blitz",
+    isReady: true,
   },
   {
     image: "/project5.png",
     title: "Portfolio",
-    description: "Portfolio Project",
-    skils: ["NextJs", "TypeScript", "Motion", "Tailwind"],
-    liveLink: "",
-    githubLink: "",
+    description:
+      "A sleek and performant personal portfolio built using Next.js and TypeScript",
+    skils: ["NextJs", "TypeScript", "Motion", "OpenAI", "PineCone"],
+    liveLink: "https://portfolio.stackzy.tech/",
+    githubLink: "https://github.com/jeet-dot-dev/portfolio",
+    isReady: true,
   },
+  {
+    image: "/project1.jpeg",
+    title: "Hire-me",
+    description:
+      "An AI-powered job interview platform that simulates real interview rounds using OpenAI.",
+    skils: ["TypeScript", "Prisma", "OpenAI", "CI/CD", "Redis", "Nextjs"],
+    liveLink: "https://github.com/jeet-dot-dev/hire-me",
+    githubLink: "https://github.com/jeet-dot-dev/hire-me",
+    isReady: false,
+  },
+  {
+    image: "/project1.png",
+    title: "Draw-we",
+    description:
+      "A real-time collaborative whiteboard app inspired by Excalidraw. Express your ideas visually with others in sync.",
+    skils: ["TypeScript", "Prisma", "Turborepo", "WebSocket", "CanvasAPI"],
+    liveLink: "https://github.com/jeet-dot-dev/Excalidraw",
+    githubLink: "https://github.com/jeet-dot-dev/Excalidraw",
+    isReady: false,
+  },
+ 
+
 ];
 
 const Project = () => {
@@ -115,16 +127,54 @@ const Project = () => {
                       whileHover={{ scale: 1.05 }}
                       transition={{ duration: 0.3 }}
                     >
-                     <Image
-  src={project.image}
-  alt={project.title}
-  width={600}
-  height={300}
-  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-  placeholder="blur"
-  blurDataURL="/placeholder.png" // Optional: can be a tiny base64 image
-/>
+                      <Image
+                        src={project.image}
+                        alt={project.title}
+                        width={600}
+                        height={300}
+                        className={`w-full h-full object-cover transition-transform duration-300 group-hover:scale-110 ${
+                          !project.isReady ? "blur-sm" : ""
+                        }`}
+                        placeholder="blur"
+                        blurDataURL="/placeholder.png" // Optional: can be a tiny base64 image
+                      />
                     </motion.div>
+
+                    {/* Coming Soon Overlay */}
+                    {!project.isReady && (
+                      <div className="absolute inset-0 bg-black/40 backdrop-blur-[1px] flex items-center justify-center">
+                        <motion.div
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.6, ease: "easeOut" }}
+                          className="text-center"
+                        >
+                          <motion.div
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.8, delay: 0.2 }}
+                            className="text-3xl md:text-4xl font-black bg-gradient-to-r from-[#16f2b3] via-cyan-400 to-blue-500 bg-clip-text text-transparent mb-2 drop-shadow-2xl"
+                            style={{
+                              filter:
+                                "drop-shadow(0 0 20px rgba(22, 242, 179, 0.3))",
+                            }}
+                          >
+                            Coming Soon
+                          </motion.div>
+                          <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 0.6, delay: 0.4 }}
+                            className="text-sm font-medium text-white/90 tracking-wider uppercase"
+                            style={{
+                              textShadow: "0 2px 10px rgba(0, 0, 0, 0.8)",
+                            }}
+                          >
+                            Under Development
+                          </motion.div>
+                        </motion.div>
+                      </div>
+                    )}
 
                     {/* Overlay on Hover */}
                   </div>
@@ -170,15 +220,22 @@ const Project = () => {
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
-                      <a
-                        href={project.liveLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#16f2b3] to-blue-500 hover:from-[#14d19f] hover:to-blue-600 text-white shadow-lg hover:shadow-xl transition-all duration-300 px-4 py-2 rounded-md"
-                      >
-                        <ExternalLink className="w-4 h-4" />
-                        Live Demo
-                      </a>
+                      {project.isReady ? (
+                        <a
+                          href={project.liveLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#16f2b3] to-blue-500 hover:from-[#14d19f] hover:to-blue-600 text-white shadow-lg hover:shadow-xl transition-all duration-300 px-4 py-2 rounded-md"
+                        >
+                          <ExternalLink className="w-4 h-4" />
+                          Live Demo
+                        </a>
+                      ) : (
+                        <div className="w-full inline-flex items-center justify-center gap-2 bg-gray-400 dark:bg-gray-600 text-gray-600 dark:text-gray-300 cursor-not-allowed px-4 py-2 rounded-md">
+                          <ExternalLink className="w-4 h-4" />
+                          Coming Soon
+                        </div>
+                      )}
                     </motion.div>
 
                     <motion.div
