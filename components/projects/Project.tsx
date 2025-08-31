@@ -24,6 +24,16 @@ type projectsType = {
 };
 
 const Projects: projectsType[] = [
+    {
+    image: "/project0.png",
+    title: "Hire-me",
+    description:
+      "An AI-powered job interview platform that simulates real interview rounds using OpenAI.",
+    skils: ["TypeScript", "Prisma", "OpenAI", "CI/CD", "Redis", "Nextjs"],
+    liveLink: "https://hireme.stackzy.tech/",
+    githubLink: "https://github.com/jeet-dot-dev/hire-me",
+    isReady: true,
+  },
    {
     image: "/project3.png",
     title: "HungerJam",
@@ -54,16 +64,7 @@ const Projects: projectsType[] = [
     githubLink: "https://github.com/jeet-dot-dev/portfolio",
     isReady: true,
   },
-  {
-    image: "/project1.jpeg",
-    title: "Hire-me",
-    description:
-      "An AI-powered job interview platform that simulates real interview rounds using OpenAI.",
-    skils: ["TypeScript", "Prisma", "OpenAI", "CI/CD", "Redis", "Nextjs"],
-    liveLink: "https://github.com/jeet-dot-dev/hire-me",
-    githubLink: "https://github.com/jeet-dot-dev/hire-me",
-    isReady: false,
-  },
+
   {
     image: "/project1.png",
     title: "Draw-we",
