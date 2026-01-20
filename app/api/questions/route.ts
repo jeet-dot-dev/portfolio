@@ -12,16 +12,42 @@ export async function POST(request: Request) {
         headers: { "Content-Type": "application/json" },
       });
     }
-    const embedding = await getQuestionEmbedding(question);
+    // Step 1: create embedding
+    let embedding;
+    try {
+      embedding = await getQuestionEmbedding(question);
+    } catch (err) {
+      console.error("Embedding error:", err);
+      return new Response(
+        JSON.stringify({ error: "Failed to create embedding", details: (err as Error).message }),
+        { status: 500, headers: { "Content-Type": "application/json" } }
+      );
+    }
 
-    //console.log(embedding);
+    // Step 2: fetch top matches from pinecone
+    let matches;
+    try {
+      matches = await getTopMatches(embedding, 5);
+    } catch (err) {
+      console.error("Pinecone/top-matches error:", err);
+      return new Response(
+        JSON.stringify({ error: "Failed to fetch relevant documents", details: (err as Error).message }),
+        { status: 500, headers: { "Content-Type": "application/json" } }
+      );
+    }
 
-    const matches = await getTopMatches(embedding, 5);
-    const prompt = getJunoHumorPrompt(
-      question,
-      matches
-    );
-    const reply = await generateResponse(prompt);
+    // Step 3: build prompt and call Gemini (or fallback)
+    const prompt = getJunoHumorPrompt(question, matches);
+    let reply;
+    try {
+      reply = await generateResponse(prompt);
+    } catch (err) {
+      console.error("Generation/Gemini error:", err);
+      return new Response(
+        JSON.stringify({ error: "Failed to generate response", details: (err as Error).message }),
+        { status: 500, headers: { "Content-Type": "application/json" } }
+      );
+    }
 
     //console.log(matches);
     //console.log("Generated reply:", reply);
@@ -32,9 +58,9 @@ export async function POST(request: Request) {
     });
   } catch (error) {
     console.error("Error processing request:", error);
-    return new Response(JSON.stringify({ error: "An error occurred" }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" },
-    });
+    return new Response(
+      JSON.stringify({ error: "An error occurred", details: (error as Error).message }),
+      { status: 500, headers: { "Content-Type": "application/json" } }
+    );
   }
 }

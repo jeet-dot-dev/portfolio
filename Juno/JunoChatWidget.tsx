@@ -62,9 +62,13 @@ const JunoChatWidget = () => {
       setMessages((prev) => [...prev, { role: "ai", text: topResponse }]);
     } catch (error) {
       console.error("Error submitting question:", error);
+      // Try to surface server error message if available
+      const serverMessage = (error as any)?.response?.data?.error || (error as Error).message;
+      const details = (error as any)?.response?.data?.details;
+      const display = details ? `${serverMessage}: ${details}` : serverMessage || "Oops! Something went wrong.";
       setMessages((prev) => [
         ...prev,
-        { role: "ai", text: "Oops! Something went wrong." },
+        { role: "ai", text: display },
       ]);
     }
 

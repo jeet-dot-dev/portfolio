@@ -12,6 +12,7 @@ import { Badge } from "../ui/badge";
 import { motion } from "framer-motion";
 import { ExternalLink, Github } from "lucide-react";
 import Image from "next/image";
+import { Tooltip, TooltipTrigger, TooltipContent } from "../ui/tooltip";
 
 type projectsType = {
   image: string;
@@ -21,6 +22,7 @@ type projectsType = {
   liveLink: string;
   githubLink: string;
   isReady?: boolean;
+  githubPrivate?: boolean;
 };
 
 const Projects: projectsType[] = [
@@ -33,6 +35,17 @@ const Projects: projectsType[] = [
     liveLink: "https://hireme.stackzy.tech/",
     githubLink: "https://github.com/jeet-dot-dev/hire-me",
     isReady: true,
+  },
+      {
+    image: "/slyde.png",
+    title: "Slyde",
+    description:
+      "An AI-powered Multimodel Video Generation Platfrom",
+    skils: ["TypeScript", "Prisma", "OpenAI", "CI/CD", "Redis", "Nextjs","Dodo Payment","Docker"],
+    liveLink: "https://slyde.tech/",
+    githubLink: "https://github.com/jeet-dot-dev/hire-me",
+    isReady: true,
+    githubPrivate: true,
   },
    {
     image: "/project3.png",
@@ -54,16 +67,7 @@ const Projects: projectsType[] = [
     githubLink: "https://github.com/jeet-dot-dev/Code-Blitz",
     isReady: true,
   },
-  {
-    image: "/project5.png",
-    title: "Portfolio",
-    description:
-      "A sleek and performant personal portfolio built using Next.js and TypeScript",
-    skils: ["NextJs", "TypeScript", "Motion", "OpenAI", "PineCone"],
-    liveLink: "https://portfolio.stackzy.tech/",
-    githubLink: "https://github.com/jeet-dot-dev/portfolio",
-    isReady: true,
-  },
+
 
   {
     image: "/project1.png",
@@ -243,21 +247,41 @@ const Project = () => {
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
-                      <Button
-                        asChild
-                        variant="outline"
-                        className="border-2 border-gray-400 dark:border-gray-600 hover:border-[#16f2b3] dark:hover:border-[#16f2b3] hover:text-[#16f2b3] text-gray-700 dark:text-gray-300 transition-all duration-300"
-                      >
-                        <a
-                          href={project.githubLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center justify-center gap-2"
+                      {project.githubPrivate ? (
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <div>
+                              <Button
+                                variant="outline"
+                                className="border-2 border-gray-400 dark:border-gray-600 text-gray-500 dark:text-gray-400 cursor-not-allowed opacity-80"
+                                disabled
+                              >
+                                <div className="flex items-center justify-center gap-2">
+                                  <Github className="w-4 h-4" />
+                                  GitHub
+                                </div>
+                              </Button>
+                            </div>
+                          </TooltipTrigger>
+                          <TooltipContent>Repository is private</TooltipContent>
+                        </Tooltip>
+                      ) : (
+                        <Button
+                          asChild
+                          variant="outline"
+                          className="border-2 border-gray-400 dark:border-gray-600 hover:border-[#16f2b3] dark:hover:border-[#16f2b3] hover:text-[#16f2b3] text-gray-700 dark:text-gray-300 transition-all duration-300"
                         >
-                          <Github className="w-4 h-4" />
-                          GitHub
-                        </a>
-                      </Button>
+                          <a
+                            href={project.githubLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center justify-center gap-2"
+                          >
+                            <Github className="w-4 h-4" />
+                            GitHub
+                          </a>
+                        </Button>
+                      )}
                     </motion.div>
                   </CardFooter>
                 </Card>
