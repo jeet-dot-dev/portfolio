@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { siteConfig } from "@/config/site";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { satoshi } from './fonts';
@@ -16,10 +17,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "dev.jeet",
-  description: "Jeet's portfolio showcasing AI, Web, and Hackathon projects.",
-};
+export const metadata: Metadata = siteConfig;
 
 export default function RootLayout({
   children,
